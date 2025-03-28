@@ -25,9 +25,9 @@ function startGame(game) {
             title = "❌⭕ XOX Oyunu";
             content = "XOX oyunu yakında burada olacak!";
             break;
-        case "tower":
-            title = "🏗️ Tower Oyunu";
-            content = "Tower oyunu yakında burada olacak!";
+        case "mines":
+            title = "💣 Mines (Mayın Tarlası)";
+            content = "Mayın tarlası oyunu yakında burada olacak!";
             break;
     }
     
