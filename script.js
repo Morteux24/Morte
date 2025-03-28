@@ -1,36 +1,22 @@
 // Başla butonuna tıklanınca oyun seçim ekranını gösteren fonksiyon
 function showGameSelection() {
-    // Başlangıç ekranını gizle
     document.getElementById("start-screen").classList.add("hidden");
-    
-    // Oyun seçim ekranını göster
     document.getElementById("game-selection").classList.remove("hidden");
-    
-    // Oyun alanını gizle
     document.getElementById("game-container").classList.add("hidden");
 }
 
 // Geri butonuna tıklanınca başlangıç ekranını gösteren fonksiyon
 function showStartScreen() {
-    // Oyun seçimi ekranını gizle
     document.getElementById("game-selection").classList.add("hidden");
-    
-    // Başlangıç ekranını göster
     document.getElementById("start-screen").classList.remove("hidden");
-    
-    // Oyun alanını gizle
     document.getElementById("game-container").classList.add("hidden");
 }
 
 // Oyun seçimi yapıldığında oyun başlatma fonksiyonu
 function startGame(game) {
-    // Oyun seçimi ekranını gizle
     document.getElementById("game-selection").classList.add("hidden");
-    
-    // Oyun alanını göster
     document.getElementById("game-container").classList.remove("hidden");
     
-    // Başlık ve içerik değiştir
     let title = "";
     let content = "";
 
@@ -71,3 +57,4 @@ function loadGameScript(game) {
     script.type = 'text/javascript';
     document.head.appendChild(script);  // Script'i başlığa ekle
 }
+
