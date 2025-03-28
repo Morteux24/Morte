@@ -3,6 +3,7 @@ body {
     text-align: center;
     background-color: #f4f4f4;
 }
+
 .container {
     display: flex;
     flex-direction: column;
@@ -10,9 +11,11 @@ body {
     justify-content: center;
     height: 100vh;
 }
+
 .hidden {
     display: none;
 }
+
 button {
     padding: 10px 20px;
     margin: 10px;
@@ -22,4 +25,29 @@ button {
     color: white;
     border: none;
     border-radius: 5px;
+}
+
+.game-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.game-card {
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.game-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #007bff;
+}
+
+.game-card p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
 }
