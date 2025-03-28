@@ -16,9 +16,20 @@
     
     <div id="game-selection" class="container hidden">
         <h1>Oyun Seç</h1>
-        <button onclick="startGame('snake')">Yılan Oyunu</button>
-        <button onclick="startGame('xox')">XOX</button>
-        <button onclick="startGame('tower')">Tower</button>
+        <div class="game-list">
+            <div class="game-card" onclick="startGame('snake')">
+                <img src="images/snake.jpg" alt="Yılan Oyunu">
+                <p>Yılan Oyunu</p>
+            </div>
+            <div class="game-card" onclick="startGame('xox')">
+                <img src="images/xox.jpg" alt="XOX">
+                <p>XOX</p>
+            </div>
+            <div class="game-card" onclick="startGame('tower')">
+                <img src="images/tower.jpg" alt="Tower">
+                <p>Tower</p>
+            </div>
+        </div>
     </div>
     
     <div id="game-container" class="container hidden">
