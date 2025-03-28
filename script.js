@@ -4,6 +4,11 @@ function showGameSelection() {
     document.getElementById("game-selection").classList.remove("hidden");
 }
 
+function showStartScreen() {
+    document.getElementById("game-selection").classList.add("hidden");
+    document.getElementById("start-screen").classList.remove("hidden");
+}
+
 function startGame(game) {
     document.getElementById("game-selection").classList.add("hidden");
     document.getElementById("game-container").classList.remove("hidden");
