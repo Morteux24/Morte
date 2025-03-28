@@ -9,9 +9,9 @@
 </head>
 <body>
     <div id="start-screen" class="container">
-        <h1>Çoklu Oyun Platformuna Hoş Geldiniz!</h1>
+        <h1>🎮 Çoklu Oyun Platformuna Hoş Geldiniz!</h1>
         <p>Başlamak için aşağıdaki butona basın.</p>
-        <button onclick="showGameSelection()">Başla</button>
+        <button class="main-btn" onclick="showGameSelection()">Başla</button>
     </div>
     
     <div id="game-selection" class="container hidden">
@@ -19,23 +19,24 @@
         <div class="game-list">
             <div class="game-card" onclick="startGame('snake')">
                 <img src="images/snake.jpg" alt="Yılan Oyunu">
-                <p>Yılan Oyunu</p>
+                <p>🐍 Yılan Oyunu</p>
             </div>
             <div class="game-card" onclick="startGame('xox')">
                 <img src="images/xox.jpg" alt="XOX">
-                <p>XOX</p>
+                <p>❌⭕ XOX</p>
             </div>
             <div class="game-card" onclick="startGame('tower')">
                 <img src="images/tower.jpg" alt="Tower">
-                <p>Tower</p>
+                <p>🏗️ Tower</p>
             </div>
         </div>
+        <button class="back-btn" onclick="showStartScreen()">Geri</button>
     </div>
     
     <div id="game-container" class="container hidden">
         <h1 id="game-title"></h1>
         <p id="game-content">Oyun yükleniyor...</p>
-        <button onclick="showGameSelection()">Geri</button>
+        <button class="back-btn" onclick="showGameSelection()">Geri</button>
     </div>
 </body>
 </html>
