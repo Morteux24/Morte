@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çoklu Oyun Platformu</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div id="start-screen" class="container">
+        <h1>Çoklu Oyun Platformu</h1>
+        <button onclick="showGameSelection()">Başla</button>
+    </div>
+    
+    <div id="game-selection" class="container hidden">
+        <h1>Oyun Seç</h1>
+        <button onclick="startGame('snake')">Yılan Oyunu</button>
+        <button onclick="startGame('xox')">XOX</button>
+        <button onclick="startGame('tower')">Tower</button>
+    </div>
+    
+    <div id="game-container" class="container hidden">
+        <h1 id="game-title"></h1>
+        <p id="game-content">Oyun yükleniyor...</p>
+        <button onclick="showGameSelection()">Geri</button>
+    </div>
+</body>
+</html>
 
