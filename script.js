@@ -57,4 +57,3 @@ function loadGameScript(game) {
     script.type = 'text/javascript';
     document.head.appendChild(script);  // Script'i başlığa ekle
 }
-
