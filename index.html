@@ -6,7 +6,6 @@
     <title>Çoklu Oyun Platformu</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
-    <script defer src="mines.js"></script> <!-- Mines.js dosyasını ekleyin -->
 </head>
 <body>
     <div id="start-screen" class="container">
@@ -38,6 +37,27 @@
         <h1 id="game-title"></h1>
         <p id="game-content">Oyun yükleniyor...</p>
         <button class="back-btn" onclick="showGameSelection()">Geri</button>
+    </div>
+
+    <!-- Yılan Oyunu -->
+    <div id="snake-game" class="game-board hidden">
+        <h2>Yılan Oyunu</h2>
+        <canvas id="gameCanvas" width="300" height="300"></canvas>
+        <p id="game-message"></p>
+    </div>
+    
+    <!-- Mayın Tarlası -->
+    <div id="mines-game" class="game-board hidden">
+        <h2>Mayın Tarlası</h2>
+        <div id="game-content"></div>
+    </div>
+    
+    <!-- XOX -->
+    <div id="xox-game" class="game-board hidden">
+        <h2>XOX Oyunu</h2>
+        <div id="xox-board">
+            <!-- XOX game board content will be generated here -->
+        </div>
     </div>
 </body>
 </html>
