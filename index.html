@@ -15,22 +15,22 @@
     </div>
     
     <div id="game-selection" class="container hidden">
+        <button class="back-btn top-left" onclick="showStartScreen()">⬅ Geri</button>
         <h1>Oyun Seç</h1>
         <div class="game-list">
             <div class="game-card" onclick="startGame('snake')">
-                <img src="images/snake.jpg" alt="Yılan Oyunu">
+                <img src="snake.jpg" alt="Yılan Oyunu">
                 <p>🐍 Yılan Oyunu</p>
             </div>
             <div class="game-card" onclick="startGame('xox')">
-                <img src="images/xox.jpg" alt="XOX">
+                <img src="xox.jpg" alt="XOX">
                 <p>❌⭕ XOX</p>
             </div>
             <div class="game-card" onclick="startGame('tower')">
-                <img src="images/tower.jpg" alt="Tower">
+                <img src="tower.jpg" alt="Tower">
                 <p>🏗️ Tower</p>
             </div>
         </div>
-        <button class="back-btn" onclick="showStartScreen()">Geri</button>
     </div>
     
     <div id="game-container" class="container hidden">
