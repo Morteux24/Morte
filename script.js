@@ -3,7 +3,7 @@ function showGameSelection() {
     // Başlangıç ekranını gizle
     document.getElementById("start-screen").classList.add("hidden");
     
-    // Oyun seçimi ekranını göster
+    // Oyun seçim ekranını göster
     document.getElementById("game-selection").classList.remove("hidden");
     
     // Oyun alanını gizle
@@ -71,4 +71,3 @@ function loadGameScript(game) {
     script.type = 'text/javascript';
     document.head.appendChild(script);  // Script'i başlığa ekle
 }
-
