@@ -33,20 +33,8 @@ function startGame(game) {
     
     document.getElementById("game-title").innerText = title;
     document.getElementById("game-content").innerText = content;
-
-    // Dinamik olarak oyun script dosyasını yükle
-    loadGameScript(game);
-}
-
-function loadGameScript(game) {
-    let existingScript = document.getElementById("gameScript");
-    if (existingScript) {
-        existingScript.remove(); // Eğer önceden eklenmişse, mevcut scripti kaldır
+    
+    if (game === "mines") {
+        loadMinesGame(); // Mines oyununu başlatan fonksiyon
     }
-
-    const script = document.createElement('script');
-    script.id = "gameScript";
-    script.src = `${game}.js`;  // Oyun dosyasının adı burada belirtiliyor
-    script.type = 'text/javascript';
-    document.head.appendChild(script);  // Scripti sayfaya ekle
 }
