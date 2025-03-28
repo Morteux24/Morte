@@ -1,87 +1,116 @@
-document.addEventListener("DOMContentLoaded", () => {
-    createMinesweeper();
-});
+document.addEventListener('DOMContentLoaded', () => {
+    const gameContent = document.querySelector('#game-content');
+    const boardSize = 8;  // Oyun tahtasının boyutu (8x8)
+    const mineCount = 10;  // Mayın sayısı
+    const cells = [];
 
-function createMinesweeper() {
-    const gameContent = document.getElementById("game-content");
-    gameContent.innerHTML = ""; // Önceki içeriği temizle
+    // Hücreleri oluştur
+    function createBoard() {
+        const minePositions = generateMinePositions();  // Mayınların yerlerini rastgele belirle
+        for (let row = 0; row < boardSize; row++) {
+            const rowCells = [];
+            const rowElement = document.createElement('div');
+            rowElement.classList.add('minesweeper-board');  // Board container'ı
 
-    const gridSize = 8; // 8x8 oyun alanı
-    const mineCount = 10; // 10 mayın
-    let grid = [];
-    
-    // Oyun alanını oluştur
-    const board = document.createElement("div");
-    board.classList.add("minesweeper-board");
-    gameContent.appendChild(board);
+            for (let col = 0; col < boardSize; col++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.row = row;
+                cell.dataset.col = col;
 
-    // Grid ve hücreleri oluştur
-    for (let row = 0; row < gridSize; row++) {
-        grid[row] = [];
-        for (let col = 0; col < gridSize; col++) {
-            const cell = document.createElement("div");
-            cell.classList.add("cell");
-            cell.dataset.row = row;
-            cell.dataset.col = col;
-            cell.addEventListener("click", () => revealCell(row, col));
-            board.appendChild(cell);
-            grid[row][col] = { element: cell, isMine: false, revealed: false };
+                if (minePositions.includes(row * boardSize + col)) {
+                    cell.dataset.mine = true;  // Mayın varsa bu hücreye veri ekle
+                }
+
+                // Hücre tıklama olayını ekle
+                cell.addEventListener('click', revealCell);
+
+                rowElement.appendChild(cell);
+                rowCells.push(cell);
+            }
+            gameContent.appendChild(rowElement);
+            cells.push(rowCells);
         }
     }
 
     // Mayınları rastgele yerleştir
-    let minesPlaced = 0;
-    while (minesPlaced < mineCount) {
-        let r = Math.floor(Math.random() * gridSize);
-        let c = Math.floor(Math.random() * gridSize);
-        if (!grid[r][c].isMine) {
-            grid[r][c].isMine = true;
-            minesPlaced++;
+    function generateMinePositions() {
+        const positions = [];
+        while (positions.length < mineCount) {
+            const pos = Math.floor(Math.random() * (boardSize * boardSize));
+            if (!positions.includes(pos)) {
+                positions.push(pos);
+            }
         }
+        return positions;
     }
 
-    function revealCell(row, col) {
-        const cell = grid[row][col];
-        if (cell.revealed) return;
+    // Hücreyi aç
+    function revealCell(event) {
+        const cell = event.target;
 
-        cell.revealed = true;
-        cell.element.classList.add("revealed");
+        if (cell.classList.contains('revealed')) return;
 
-        if (cell.isMine) {
-            cell.element.innerHTML = "💣";
-            alert("Oyun Bitti! Mayına bastınız.");
+        cell.classList.add('revealed');  // Açık hale getir
+
+        if (cell.dataset.mine) {
+            cell.style.backgroundColor = 'red';  // Mayına basıldıysa kırmızı yap
+            alert("Mayına Bastınız! Oyun Bitti!");
             return;
         }
 
-        let minesNearby = countAdjacentMines(row, col);
-        if (minesNearby > 0) {
-            cell.element.innerHTML = minesNearby;
+        const surroundingMines = countSurroundingMines(cell);
+        if (surroundingMines > 0) {
+            cell.textContent = surroundingMines;  // Eğer çevresinde mayın varsa göster
         } else {
-            revealNearbyCells(row, col);
+            // Çevresinde mayın yoksa, etrafındaki hücreleri aç
+            revealAdjacentCells(cell);
         }
     }
 
-    function countAdjacentMines(row, col) {
-        let count = 0;
-        for (let r = -1; r <= 1; r++) {
-            for (let c = -1; c <= 1; c++) {
-                let newRow = row + r, newCol = col + c;
-                if (newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize) {
-                    if (grid[newRow][newCol].isMine) count++;
+    // Çevredeki mayınları say
+    function countSurroundingMines(cell) {
+        const row = parseInt(cell.dataset.row);
+        const col = parseInt(cell.dataset.col);
+        let mineCount = 0;
+
+        // Komşu hücrelere bak
+        for (let i = -1; i <= 1; i++) {
+            for (let j = -1; j <= 1; j++) {
+                const r = row + i;
+                const c = col + j;
+
+                if (r >= 0 && r < boardSize && c >= 0 && c < boardSize) {
+                    const neighborCell = cells[r][c];
+                    if (neighborCell.dataset.mine) {
+                        mineCount++;
+                    }
                 }
             }
         }
-        return count;
+        return mineCount;
     }
 
-    function revealNearbyCells(row, col) {
-        for (let r = -1; r <= 1; r++) {
-            for (let c = -1; c <= 1; c++) {
-                let newRow = row + r, newCol = col + c;
-                if (newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize) {
-                    revealCell(newRow, newCol);
+    // Etrafındaki hücreleri aç
+    function revealAdjacentCells(cell) {
+        const row = parseInt(cell.dataset.row);
+        const col = parseInt(cell.dataset.col);
+
+        for (let i = -1; i <= 1; i++) {
+            for (let j = -1; j <= 1; j++) {
+                const r = row + i;
+                const c = col + j;
+
+                if (r >= 0 && r < boardSize && c >= 0 && c < boardSize) {
+                    const neighborCell = cells[r][c];
+                    if (!neighborCell.classList.contains('revealed')) {
+                        revealCell({ target: neighborCell });  // Hücreyi aç
+                    }
                 }
             }
         }
     }
-}
+
+    // Oyun başladığında tahtayı oluştur
+    createBoard();
+});
