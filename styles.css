@@ -13,7 +13,7 @@ body {
     height: 100vh;
 }
 
-/* Genel Container */
+/* Genel Container Stili */
 .container {
     display: flex;
     flex-direction: column;
@@ -99,6 +99,7 @@ body {
     transform: scale(1.1);
 }
 
+/* Sol Üst Köşe Geri Butonu */
 .top-left {
     position: absolute;
     top: 20px;
@@ -106,7 +107,7 @@ body {
     background: rgba(0, 0, 0, 0.3);
 }
 
-/* Mayın Tarlası Özel Stiller */
+/* Minesweeper Board */
 .minesweeper-board {
     display: grid;
     grid-template-columns: repeat(8, 40px);
