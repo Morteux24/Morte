@@ -1,16 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const gameContent = document.querySelector('#game-content');
-    const boardSize = 8;  // Oyun tahtasının boyutu (8x8)
-    const mineCount = 10;  // Mayın sayısı
+    const boardSize = 8;
+    const mineCount = 10;
     const cells = [];
 
-    // Hücreleri oluştur
     function createBoard() {
-        const minePositions = generateMinePositions();  // Mayınların yerlerini rastgele belirle
+        const minePositions = generateMinePositions();
         for (let row = 0; row < boardSize; row++) {
             const rowCells = [];
             const rowElement = document.createElement('div');
-            rowElement.classList.add('minesweeper-board');  // Board container'ı
+            rowElement.classList.add('minesweeper-board');
 
             for (let col = 0; col < boardSize; col++) {
                 const cell = document.createElement('div');
@@ -19,12 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 cell.dataset.col = col;
 
                 if (minePositions.includes(row * boardSize + col)) {
-                    cell.dataset.mine = true;  // Mayın varsa bu hücreye veri ekle
+                    cell.dataset.mine = true;
                 }
 
-                // Hücre tıklama olayını ekle
                 cell.addEventListener('click', revealCell);
-
                 rowElement.appendChild(cell);
                 rowCells.push(cell);
             }
@@ -33,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Mayınları rastgele yerleştir
     function generateMinePositions() {
         const positions = [];
         while (positions.length < mineCount) {
@@ -45,36 +41,32 @@ document.addEventListener('DOMContentLoaded', () => {
         return positions;
     }
 
-    // Hücreyi aç
     function revealCell(event) {
         const cell = event.target;
 
         if (cell.classList.contains('revealed')) return;
 
-        cell.classList.add('revealed');  // Açık hale getir
+        cell.classList.add('revealed');
 
         if (cell.dataset.mine) {
-            cell.style.backgroundColor = 'red';  // Mayına basıldıysa kırmızı yap
+            cell.style.backgroundColor = 'red';
             alert("Mayına Bastınız! Oyun Bitti!");
             return;
         }
 
         const surroundingMines = countSurroundingMines(cell);
         if (surroundingMines > 0) {
-            cell.textContent = surroundingMines;  // Eğer çevresinde mayın varsa göster
+            cell.textContent = surroundingMines;
         } else {
-            // Çevresinde mayın yoksa, etrafındaki hücreleri aç
             revealAdjacentCells(cell);
         }
     }
 
-    // Çevredeki mayınları say
     function countSurroundingMines(cell) {
         const row = parseInt(cell.dataset.row);
         const col = parseInt(cell.dataset.col);
         let mineCount = 0;
 
-        // Komşu hücrelere bak
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 const r = row + i;
@@ -91,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return mineCount;
     }
 
-    // Etrafındaki hücreleri aç
     function revealAdjacentCells(cell) {
         const row = parseInt(cell.dataset.row);
         const col = parseInt(cell.dataset.col);
@@ -104,13 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (r >= 0 && r < boardSize && c >= 0 && c < boardSize) {
                     const neighborCell = cells[r][c];
                     if (!neighborCell.classList.contains('revealed')) {
-                        revealCell({ target: neighborCell });  // Hücreyi aç
+                        revealCell({ target: neighborCell });
                     }
                 }
             }
         }
     }
 
-    // Oyun başladığında tahtayı oluştur
-    createBoard();
+    // Bu fonksiyon ile Mines oyunu başlatılır
+    window.loadMinesGame = function() {
+        gameContent.innerHTML = ''; // Board'u sıfırlayın
+        createBoard(); // Yeni board oluşturun
+    };
 });
