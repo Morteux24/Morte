@@ -8,12 +8,14 @@
     <script defer src="script.js"></script>
 </head>
 <body>
+    <!-- Başlangıç Ekranı -->
     <div id="start-screen" class="container">
         <h1>🎮 Çoklu Oyun Platformuna Hoş Geldiniz!</h1>
         <p>Başlamak için aşağıdaki butona basın.</p>
         <button class="main-btn" onclick="showGameSelection()">Başla</button>
     </div>
     
+    <!-- Oyun Seçim Ekranı -->
     <div id="game-selection" class="container hidden">
         <button class="back-btn top-left" onclick="showStartScreen()">⬅ Geri</button>
         <h1>Oyun Seç</h1>
@@ -33,6 +35,7 @@
         </div>
     </div>
     
+    <!-- Oyun Ekranı -->
     <div id="game-container" class="container hidden">
         <h1 id="game-title"></h1>
         <p id="game-content">Oyun yükleniyor...</p>
